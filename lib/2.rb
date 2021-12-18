@@ -1,6 +1,6 @@
 class Day2
   def run_day (file)
-    h, d = 0, 0
+    h, d, a = 0, 0, 0
 
     File.foreach(file) { |l|
       incr = l.split[1].to_i
@@ -8,10 +8,11 @@ class Day2
       case l[0,2]
       when "fo"
         h += incr
+        d = (a > 0) ? d + (a * incr) : 0 
       when "up"
-        d -= incr
+        a -= incr
       else
-        d += incr
+        a += incr
       end
     }
 
