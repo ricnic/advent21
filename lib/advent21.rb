@@ -2,6 +2,7 @@
 
 require_relative "advent21/version"
 require_relative "1"
+require_relative "2"
 
 module Advent21
   class Error < StandardError; end
