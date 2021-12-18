@@ -2,16 +2,18 @@ class Day1
   def run_day (file)
     input = File.read(file).split.map(&:to_i)
 
-    increased = 0;
+    a, b, incr = [], [], 0;
 
-    input.each_with_index do |(v), ind|
-      if (ind != 0)
-        if (v > input[ind-1])
-          increased += 1
-        end
+    input.each { |i|
+      a.push(i) if (a.length < 3)
+      b.push(i) if (a.length > 1 && b.length < 3)        
+      if a.length == 3 && b.length == 3
+        incr += 1 if b.sum > a.sum
+        a.replace(b)
+        b.shift
       end
-    end
+    }
 
-    return increased
+    return incr
   end
 end
