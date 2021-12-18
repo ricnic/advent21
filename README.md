@@ -2,7 +2,7 @@
 
 Code to tackle the daily tasks presented by the [2021 Advent of Code](https://adventofcode.com/2021) Challenge!
 
-There's an script file, an input file and a test file for each day. For example, `1.rb`,`1.input` and `1.input.test` 
+There's a script file, an input file and a test input file for each day. For example, `1.rb`,`1.input` and `1.input.test` 
 
 ## Usage
 
