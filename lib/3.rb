@@ -5,22 +5,54 @@ class Day3
     end.sum
   end
 
+  def Day3.trim_report(vert, hori, use_min)
+    ind = 0
+
+    while hori.length > 1 do
+      zeros = vert[ind].count('0')
+      ones = vert[ind].count('1')
+
+      char = '1'
+
+      if use_min
+        char = '0' if (zeros == ones || zeros < ones)
+      else
+        char = '0' if zeros > ones
+      end
+
+      hori.replace(hori.select { |cl| cl.chars[ind] == char })
+
+      # recreate the vertical array
+      vert = []
+      hori.map { |x| 
+        x.chars.each_with_index { |(c), i|
+          vert[i] ? vert[i].push(c) : vert[i] = [].push(c)
+        } 
+      }
+
+      ind += 1
+    end
+
+    return hori
+  end
+
   def run_day (file)
-    bin, gam, eps = [], [], []
+    bin, oxy, co2 = [], [], []
 
     File.read(file).split.map { |x| 
+      oxy.push(x)
+      co2.push(x)
       x.chars.each_with_index { |(c), i|
         bin[i] ? bin[i].push(c) : bin[i] = [].push(c)
       } 
     }
 
-    bin.each { |b|
-      gam.push(b.max_by { |p| b.count(p) })
-      eps.push(b.min_by { |p| b.count(p) })
-    }
+    oxy = Day3.trim_report(bin, oxy, false)
+    c02 = Day3.trim_report(bin, co2, true)
 
-    gam_dec = Day3.to_dec(gam.join)
-    eps_dec = Day3.to_dec(eps.join)
-    power_consumption = gam_dec * eps_dec
+    oxy_dec = Day3.to_dec(oxy[0])
+    co2_dec = Day3.to_dec(co2[0])
+
+    life_support = oxy_dec * co2_dec
   end
 end
